@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios - Solución de Tickets</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <div class="logo-icon">✅</div>
+                <span class="logo-text">Solución de Tickets</span>
+            </a>
+            <div class="nav-actions">
+                <span class="user-info">👤 Admin</span>
+                <button onclick="logout()" class="btn-secondary">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="admin-dashboard" style="padding: 100px 0 60px; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Gestión de Usuarios</h1>
+                <div class="header-actions">
+                    <button onclick="showAddUserModal()" class="btn-hero-primary">Agregar Usuario</button>
+                </div>
+            </div>
+
+            <div class="dashboard-nav">
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="users.html" class="nav-item active">Usuarios</a>
+                <a href="../user/tickets.html" class="nav-item">Tickets</a>
+            </div>
+
+            <div class="users-table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#001</td>
+                            <td>Juan Pérez</td>
+                            <td>juan@demo.com</td>
+                            <td><span class="role-badge user">Usuario</span></td>
+                            <td><span class="status-badge active">Activo</span></td>
+                            <td>
+                                <button class="btn-small btn-edit">Editar</button>
+                                <button class="btn-small btn-danger">Desactivar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#002</td>
+                            <td>María García</td>
+                            <td>maria@demo.com</td>
+                            <td><span class="role-badge admin">Admin</span></td>
+                            <td><span class="status-badge active">Activo</span></td>
+                            <td>
+                                <button class="btn-small btn-edit">Editar</button>
+                                <button class="btn-small btn-danger">Desactivar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/auth.js"></script>
+</body>
+</html>

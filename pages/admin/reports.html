@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1><a href="../../index.html">Mi Sitio</a></h1>
+            </div>
+            <div class="user-menu">
+                <span>Admin</span>
+                <a href="../../index.html" class="btn btn-small">Cerrar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="users.html">Gestión de Usuarios</a></li>
+                <li><a href="reports.html" class="active">Reportes</a></li>
+                <li><a href="../user/tickets.html">Tickets</a></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h2>Reportes y Estadísticas</h2>
+            
+            <div class="report-filters">
+                <select>
+                    <option>Último mes</option>
+                    <option>Últimos 3 meses</option>
+                    <option>Último año</option>
+                </select>
+                <button class="btn btn-secondary">Generar Reporte</button>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h3>Usuarios Registrados por Mes</h3>
+                    <div class="chart-placeholder">
+                        [Gráfico de usuarios por mes]
+                    </div>
+                </div>
+                
+                <div class="chart-box">
+                    <h3>Tickets por Estado</h3>
+                    <div class="chart-placeholder">
+                        [Gráfico circular de tickets]
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-summary">
+                <h3>Resumen del Período</h3>
+                <ul>
+                    <li>Total de usuarios nuevos: 156</li>
+                    <li>Tickets resueltos: 234</li>
+                    <li>Tiempo promedio de resolución: 2.5 horas</li>
+                    <li>Satisfacción del cliente: 4.8/5</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Tickets - Solución de Tickets</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <div class="logo-icon">✅</div>
+                <span class="logo-text">Solución de Tickets</span>
+            </a>
+            <div class="nav-actions">
+                <span class="user-info">👤 Usuario</span>
+                <button onclick="logout()" class="btn-secondary">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="user-tickets" style="padding: 100px 0 60px; background: var(--bg-secondary);">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Mis Tickets de Soporte</h1>
+                <div class="header-actions">
+                    <button onclick="showNewTicketModal()" class="btn-hero-primary">Crear Nuevo Ticket</button>
+                </div>
+            </div>
+
+            <div class="tickets-grid">
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-001</span>
+                        <span class="status-badge open">Abierto</span>
+                    </div>
+                    <h3>Problema con el inicio de sesión</h3>
+                    <p>No puedo acceder a mi cuenta desde ayer. He intentado restablecer la contraseña pero no recibo el email.</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 15/08/2024</span>
+                        <span class="meta-item priority-medium">⚠️ Media</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn-small">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-002</span>
+                        <span class="status-badge resolved">Resuelto</span>
+                    </div>
+                    <h3>Consulta sobre facturación</h3>
+                    <p>Tengo dudas sobre mi última factura y los cargos que aparecen.</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 10/08/2024</span>
+                        <span class="meta-item priority-low">🔵 Baja</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn-small">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para nuevo ticket -->
+    <div id="newTicketModal" class="ticket-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Crear Nuevo Ticket</h3>
+                <button onclick="hideNewTicketModal()" class="close-btn">✕</button>
+            </div>
+            <form id="newTicketForm" class="ticket-form">
+                <div class="form-group">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" rows="5" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="priority">Prioridad</label>
+                    <select id="priority" name="priority">
+                        <option value="low">Baja</option>
+                        <option value="medium">Media</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-hero-primary">Crear Ticket</button>
+                    <button type="button" onclick="hideNewTicketModal()" class="btn-secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/auth.js"></script>
+</body>
+</html>

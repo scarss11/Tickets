@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Tickets de Soporte</title>
+    <link rel="stylesheet" href="./demo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">🎫</div>
+                <span>Sistema de Tickets</span>
+            </a>
+            <div class="nav-actions">
+                <span class="user-info">👤 Usuario Demo</span>
+                <button class="btn btn-secondary btn-small" onclick="showAuthOptions()">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="main-content">
+        <div class="container">
+            <div class="features-section-compact">
+                <h2 class="features-title">Funcionalidades Principales</h2>
+                <div class="features-grid-compact">
+                    <div class="feature-item-compact">
+                        <span class="feature-icon-compact">🎫</span>
+                        <span class="feature-text">Gestión de Tickets</span>
+                    </div>
+                    <div class="feature-item-compact">
+                        <span class="feature-icon-compact">⚡</span>
+                        <span class="feature-text">Respuestas Rápidas</span>
+                    </div>
+                    <div class="feature-item-compact">
+                        <span class="feature-icon-compact">📊</span>
+                        <span class="feature-text">Reportes Detallados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Mis Tickets de Soporte</h1>
+                    <p style="color: var(--text-secondary); margin-top: 8px;">
+                        Gestiona todos tus tickets desde un solo lugar
+                    </p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-secondary btn-small" onclick="showNewTicketModal('draft')">
+                        📝 Crear Borrador
+                    </button>
+                    <button class="btn btn-primary" onclick="showNewTicketModal('active')">
+                        ➕ Crear Ticket
+                    </button>
+                </div>
+            </div>
+
+            <div class="filters-section collapsible-filter-group">
+                <div class="collapsible-header" onclick="toggleCollapsible('filterContent')">
+                    <h3 class="collapsible-title">Filtros de Estados</h3>
+                    <div class="toggle-icon">▲</div>
+                </div>
+                <div class="collapsible-content active" id="filterContent">
+                    <div class="filter-controls">
+                        <div class="filter-group-row">
+                            <div class="filter-buttons">
+                                <button class="btn-filter-status active" data-status="all" onclick="filterTickets()">Todos</button>
+                                <button class="btn-filter-status" data-status="open" onclick="filterTickets()">Abiertos</button>
+                                <button class="btn-filter-status" data-status="in-progress" onclick="filterTickets()">En Progreso</button>
+                                <button class="btn-filter-status" data-status="resolved" onclick="filterTickets()">Resueltos</button>
+                                <button class="btn-filter-status" data-status="draft" onclick="filterTickets()">Borradores</button>
+                            </div>
+                        </div>
+                        <div class="filter-group-row">
+                            <div class="filter-priority">
+                                <label>Prioridad:</label>
+                                <div class="filter-buttons">
+                                    <button class="btn-filter-priority active" data-priority="all" onclick="filterTickets()">Todas</button>
+                                    <button class="btn-filter-priority" data-priority="high" onclick="filterTickets()">Alta</button>
+                                    <button class="btn-filter-priority" data-priority="medium" onclick="filterTickets()">Media</button>
+                                    <button class="btn-filter-priority" data-priority="low" onclick="filterTickets()">Baja</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-group-row">
+                            <div class="filter-search">
+                                <label>Buscar:</label>
+                                <input type="text" id="searchFilter" placeholder="Buscar tickets..." onkeyup="filterTickets()">
+                            </div>
+                        </div>
+                        <button class="btn-filter-clear" onclick="clearFilters()">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tickets-grid" id="ticketsGrid">
+                <div class="ticket-card" data-status="draft" data-priority="medium" data-search="Problema con la sincronización" data-ticket-id="TK-DRAFT-001">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-DRAFT-001</span>
+                        <span class="status-badge draft">Borrador</span>
+                    </div>
+                    <h3>Borrador: Problema con la sincronización</h3>
+                    <p>Este es un ticket en borrador que aún no ha sido enviado...</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 20/08/2024</span>
+                        <span class="meta-item priority-medium">⚠️ Media</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn btn-primary btn-small" onclick="editDraft('TK-DRAFT-001')">✏️ Editar</button>
+                        <button class="btn btn-success btn-small" onclick="submitDraft('TK-DRAFT-001')">📤 Enviar</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteDraft('TK-DRAFT-001')">🗑️</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card" data-status="open" data-priority="medium" data-search="Problema con el inicio de sesión" data-ticket-id="TK-001">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-001</span>
+                        <span class="status-badge open">Abierto</span>
+                    </div>
+                    <h3>Problema con el inicio de sesión</h3>
+                    <p>No puedo acceder a mi cuenta desde ayer. He intentado restablecer la contraseña pero no recibo el email de recuperación.</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 15/08/2024</span>
+                        <span class="meta-item priority-medium">⚠️ Media</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn btn-secondary btn-small" onclick="viewTicketDetails('TK-001')">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card" data-status="resolved" data-priority="low" data-search="Consulta sobre facturación" data-ticket-id="TK-002">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-002</span>
+                        <span class="status-badge resolved">Resuelto</span>
+                    </div>
+                    <h3>Consulta sobre facturación</h3>
+                    <p>Tengo dudas sobre mi última factura y los cargos que aparecen. ¿Podrían explicarme el desglose?</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 10/08/2024</span>
+                        <span class="meta-item priority-low">🔵 Baja</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn btn-secondary btn-small" onclick="viewTicketDetails('TK-002')">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card" data-status="in-progress" data-priority="high" data-search="Error en la aplicación móvil" data-ticket-id="TK-003">
+                    <div class="ticket-header">
+                        <span class="ticket-id">#TK-003</span>
+                        <span class="status-badge in-progress">En Progreso</span>
+                    </div>
+                    <h3>Error en la aplicación móvil</h3>
+                    <p>La aplicación se cierra inesperadamente al intentar cargar la sección de reportes en dispositivos Android.</p>
+                    <div class="ticket-meta">
+                        <span class="meta-item">📅 18/08/2024</span>
+                        <span class="meta-item priority-high">🔴 Alta</span>
+                    </div>
+                    <div class="ticket-actions">
+                        <button class="btn btn-secondary btn-small" onclick="viewTicketDetails('TK-003')">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-info">
+                <p>🎯 <strong>Modo Demo:</strong> Esta es una demostración interactiva del sistema. 
+                <a href="#" onclick="showAuthOptions()">Registrarse</a> para acceso completo.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="newTicketModal" class="modal">
+        <div class="modal-overlay" onclick="hideNewTicketModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Crear Nuevo Ticket</h3>
+                <button onclick="hideNewTicketModal()" class="close-btn">✕</button>
+            </div>
+            <form id="newTicketForm">
+                <input type="hidden" id="ticketType" value="active">
+                <input type="hidden" id="editingTicketId" value="">
+                
+                <div class="form-group">
+                    <label class="form-label" for="subject">Asunto *</label>
+                    <input type="text" id="subject" name="subject" class="form-input" 
+                           placeholder="Describe brevemente tu problema" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="description">Descripción Detallada *</label>
+                    <textarea id="description" name="description" class="form-textarea" 
+                              placeholder="Explica tu problema con el mayor detalle posible..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="priority">Prioridad</label>
+                    <select id="priority" name="priority" class="form-select">
+                        <option value="low">🔵 Baja - No es urgente</option>
+                        <option value="medium" selected>⚠️ Media - Necesita atención</option>
+                        <option value="high">🔴 Alta - Problema crítico</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">✅ Crear Ticket</button>
+                    <button type="button" onclick="hideNewTicketModal()" class="btn btn-secondary">❌ Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-overlay" onclick="hideLoginModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Iniciar Sesión</h3>
+                <button onclick="hideLoginModal()" class="close-btn">✕</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">🚀 Iniciar Sesión</button>
+                    <button type="button" onclick="hideLoginModal()" class="btn btn-secondary">Cancelar</button>
+                </div>
+                <p style="text-align: center; margin-top: 16px; color: var(--text-secondary);">
+                    ¿No tienes cuenta? <a href="#" onclick="hideLoginModal(); showRegisterModal();" style="color: var(--primary-color); text-decoration: none;">Regístrate aquí</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-overlay" onclick="hideRegisterModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Crear Cuenta Gratis</h3>
+                <button onclick="hideRegisterModal()" class="close-btn">✕</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label class="form-label" for="registerName">Nombre Completo</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">Contraseña</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">📝 Crear Cuenta</button>
+                    <button type="button" onclick="hideRegisterModal()" class="btn btn-secondary">Cancelar</button>
+                </div>
+                <p style="text-align: center; margin-top: 16px; color: var(--text-secondary);">
+                    ¿Ya tienes cuenta? <a href="#" onclick="hideRegisterModal(); showLoginModal();" style="color: var(--primary-color); text-decoration: none;">Inicia sesión</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
