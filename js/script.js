@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initAnimations();
     initParallax();
     initIntersectionObserver();
-    highlightActiveLink(); // <--- LLAMADA A LA NUEVA FUNCIÓN
+    highlightActiveLink();
+    initHamburgerMenu(); // <--- AÑADIR ESTA LÍNEA
 });
 
 //======================================================================
@@ -383,6 +384,40 @@ class ModalManager {
         this.modal.style.top = top + 'px';
         this.modal.style.transform = 'translate(-50%, -100%)';
     }
+
+}
+//======================================================================
+// MENÚ HAMBURGUESA
+//======================================================================
+function initHamburgerMenu() {
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const navContent = document.getElementById('navContent');
+
+    if (!hamburgerMenu || !navContent) return;
+
+    hamburgerMenu.addEventListener('click', function () {
+        hamburgerMenu.classList.toggle('active');
+        navContent.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un enlace (móvil)
+    const navLinks = navContent.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            hamburgerMenu.classList.remove('active');
+            navContent.classList.remove('active');
+        });
+    });
+
+    // Cerrar menú al hacer clic fuera (móvil)
+    document.addEventListener('click', function (event) {
+        if (window.innerWidth <= 768) {
+            if (!hamburgerMenu.contains(event.target) && !navContent.contains(event.target)) {
+                hamburgerMenu.classList.remove('active');
+                navContent.classList.remove('active');
+            }
+        }
+    });
 }
 
 // Inicializar cuando el DOM esté listo

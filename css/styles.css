@@ -1813,3 +1813,115 @@ body {
         /* Elimina la sombra para un diseño más limpio en móviles */
     }
 }
+/* === MENÚ HAMBURGUESA === */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* === DESKTOP: Mantener diseño original === */
+@media (min-width: 769px) {
+  .nav-content {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    /* IMPORTANTE: Asegurar que esté visible en desktop */
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 32px;
+  }
+  
+  .nav-actions {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+/* === MÓVIL: Menú hamburguesa === */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+  
+  .nav-content {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+  }
+  
+  .nav-content.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .nav-menu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .nav-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .nav-actions .btn-secondary,
+  .nav-actions .btn-primary {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+}
+/* Forzar que los enlaces aparezcan en el menú móvil */
+@media (max-width: 768px) {
+  .nav-content .nav-menu {
+    display: flex !important;
+  }
+}
